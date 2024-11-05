@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../redux/actions/cartActions';
 
 const Cart = () => {
+    // Fetch initial cart items from Redux store
     const cartreducerstate = useSelector(state => state.addToCartReducer);
+    const { cartItems: initialCartItems } = cartreducerstate;
     const dispatch = useDispatch();
-    const { cartItems } = cartreducerstate;
+
+    // Manage cartItems locally in state
+    const [cartItems, setCartItems] = useState(initialCartItems);
+
+    // Local delete function
+    const handleDelete = (itemId) => {
+        // Filter out the deleted item
+        const updatedCartItems = cartItems.filter(item => item._id !== itemId);
+        
+        // Update the local state with filtered items
+        setCartItems(updatedCartItems);
+
+        // Clear specific cart data from localStorage
+        localStorage.removeItem('cartData');
+
+        // Optional: save the updated cart back to localStorage if needed
+        localStorage.setItem('cartData', JSON.stringify(updatedCartItems));
+    };
 
     return (
         <div className='container'>
@@ -27,30 +46,12 @@ const Cart = () => {
                                 <tr key={item._id}>
                                     <td>{item.name}</td>
                                     <td>{item.price}</td>
-                                    <td>
-                                        <select
-                                            value={item.quantity}
-                                            onChange={(e) => {
-                                                const quantity = parseInt(e.target.value, 10);
-                                                if (quantity > 0) {
-                                                    dispatch(addToCart(item, quantity));
-                                                } else {
-                                                    dispatch(removeFromCart(item._id));
-                                                }
-                                            }}
-                                        >
-                                            {[...Array(item.countInStock).keys()].map((_, i) => (
-                                                <option key={i} value={i + 1}>
-                                                    {i + 1}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </td>
+                                    <td>{item.quantity}</td>
                                     <td>{item.quantity * item.price}</td>
                                     <td>
                                         <i
                                             className='far fa-trash-alt'
-                                            onClick={() => dispatch(removeFromCart(item._id))}
+                                            onClick={() => handleDelete(item._id)}
                                             style={{ cursor: 'pointer' }}
                                         ></i>
                                     </td>

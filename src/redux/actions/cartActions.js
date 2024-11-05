@@ -11,3 +11,4 @@ export const addToCart = (product, quantity) => (dispatch, getState) => {
 
     localStorage.setItem('cartItems', JSON.stringify(getState().addToCartReducer.cartItems));
 };
+
