@@ -15,7 +15,7 @@ export default function Checkout(amount) {
             amount={amount * 100}
             shippingAddress
             currency = 'ZAR'
-            >
+        >
             <button className='btn btn-dark'>PAY NOW</button>
         </StripeCheckout>
     </div>
