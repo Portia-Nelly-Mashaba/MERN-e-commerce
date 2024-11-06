@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../redux/actions/cartActions';
+import Checkout from '../components/Checkout';
 
 const Cart = () => {
-    // Fetch initial cart items from Redux store
     const cartreducerstate = useSelector(state => state.addToCartReducer);
     const { cartItems: initialCartItems } = cartreducerstate;
     const dispatch = useDispatch();
@@ -11,18 +11,20 @@ const Cart = () => {
     // Manage cartItems locally in state
     const [cartItems, setCartItems] = useState(initialCartItems);
 
-    // Local delete function
+    const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+   
     const handleDelete = (itemId) => {
-        // Filter out the deleted item
+ 
         const updatedCartItems = cartItems.filter(item => item._id !== itemId);
         
-        // Update the local state with filtered items
+       
         setCartItems(updatedCartItems);
 
-        // Clear specific cart data from localStorage
+       
         localStorage.removeItem('cartData');
 
-        // Optional: save the updated cart back to localStorage if needed
+        
         localStorage.setItem('cartData', JSON.stringify(updatedCartItems));
     };
 
@@ -59,6 +61,11 @@ const Cart = () => {
                             ))}
                         </tbody>
                     </table>
+                    <hr />
+                    <h1>Total Amount</h1>
+                    <h1>R{totalPrice}</h1>
+                    <hr/>
+                    <Checkout amount={totalPrice}/>
                 </div>
             </div>
         </div>

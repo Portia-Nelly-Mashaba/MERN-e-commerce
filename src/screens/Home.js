@@ -6,6 +6,7 @@ import { getAllProducts } from '../redux/actions/productActions';
 import { addToCart } from '../redux/actions/cartActions'; // Import addToCart action
 import Loader from '../components/Loader';
 import Error from '../components/Error';
+import Filter from '../components/Filter';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,8 @@ const Home = () => {
   };
 
   return (
+    <>
+    <Filter />
     <div className='content-center'>
       <div className='row justify-content-center mt-4 g-4'>
         {loading ? (
@@ -43,6 +46,7 @@ const Home = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 
