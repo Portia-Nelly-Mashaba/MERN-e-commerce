@@ -5,12 +5,14 @@ import { createStore, applyMiddleware } from "redux";
 import {thunk} from 'redux-thunk'
 import { addToCart } from "./actions/cartActions.js";
 import addToCartReducer from "./reducers/cartReducer.js";
+import { registerNewUserReducer } from "./reducers/userReducer.js";
 
 
 const finalReducer = combineReducers({
     getAllProductsReducer : getAllProductsReducer,
     getAllProductByIdReducer : getAllProductByIdReducer,
-    addToCartReducer : addToCartReducer
+    addToCartReducer : addToCartReducer,
+    registerNewUserReducer: registerNewUserReducer
 
 })
 

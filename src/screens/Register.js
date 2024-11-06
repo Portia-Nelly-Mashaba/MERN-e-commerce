@@ -1,53 +1,79 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { registerNewUser } from "../redux/actions/userAction";
 
 const Register = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [cpassword, setCpassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cpassword, setCpassword] = useState("");
 
-    const register = () => {
-        
+  const dispatch = useDispatch()
+
+  function register(e) {
+    e.preventDefault()
+    const user = {
+        name: name,
+        email: email,
+        password: password
     }
-    return (
-        <div className="container d-flex align-items-center justify-content-center vh-100">
-            <div className="row w-100">
-                <div className="col-md-5 mx-auto mt-4 card p-4">
-                    <h1 className="text-center">Register</h1>
-                    <input
-                        type="text"
-                        placeholder="Name"
-                        className="form-control mb-3"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                    <input
-                        type="email"
-                        placeholder="Email Address"
-                        className="form-control mb-3"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        className="form-control mb-3"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Confirm Password"
-                        className="form-control mb-3"
-                        value={cpassword}
-                        onChange={(e) => setCpassword(e.target.value)}
-                    />
 
-                    <button className='btn btn-dark mt-2'onClick={register}>Register</button>
-                </div>
+    if (password !== cpassword) {
+        alert('Passwords do not match');
+        return;
+    }else{
+        dispatch(registerNewUser())
+    }
+  }
+  return (
+    <div className="container d-flex align-items-center justify-content-center vh-100">
+      <div className="row w-100">
+        <div className="col-md-5 mx-auto mt-4 card p-4">
+          <h1 className="text-center">Register</h1>
+          <form onSubmit={register}>
+            <input
+              type="text"
+              placeholder="Name"
+              className="form-control mb-3"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <input
+              type="email"
+              placeholder="Email Address"
+              className="form-control mb-3"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              className="form-control mb-3"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              className="form-control mb-3"
+              value={cpassword}
+              onChange={(e) => setCpassword(e.target.value)}
+              required
+            />
+
+            <div className="text-right"> 
+            <button type="submit" className="btn btn-dark mt-2">
+              Register
+            </button>
             </div>
+          </form>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default Register;
