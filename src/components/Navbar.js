@@ -7,9 +7,10 @@ function Navbar() {
 
   const { cartItems } = addtoreducer;
 
-  const currentUser = useSelector((state) => state.loginUserReducer.currentUser);
+  const currentUser = useSelector(
+    (state) => state.loginUserReducer.currentUser
+  );
 
- 
   return (
     <>
       <nav
@@ -33,23 +34,49 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <ul className="navbar-nav justify-content-end w-100">
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="#" style={{ color: "white" }}>
                 Add Product
               </a>
             </li>
             {currentUser ? (
-              <li className="nav-item">
-                <a className="nav-link" href="/" style={{ color: 'white'}}>{currentUser.user.name}</a>
-              </li>
-            ) : (
-              <li className="nav-item active">
-                <a className="nav-link" href="/login">Login</a>
-              </li>
-            )}
+  <li className="nav-item dropdown">
+    <button
+      className="btn btn-secondary dropdown-toggle"
+      type="button"
+      id="dropdownMenuButton"
+      data-bs-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+      style={{ color: "white" }}
+    >
+      {currentUser.user.name} 
+    </button>
+    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a className="dropdown-item" href="/profile">My Profile</a>
+      <a className="dropdown-item" href="/orders">Orders</a>
+      <a className="dropdown-item" href="/products">My Products</a>
+      <hr class="dropdown-divider" />
+      <a class="dropdown-item" href="#">Logout</a>
+    </div>
+  </li>
+) : (
+  <li className="nav-item active">
+    <a
+      className="nav-link"
+      href="/login"
+      style={{ color: "white" }}
+    >
+      Login
+    </a>
+  </li>
+)}
 
             <li className="nav-item">
               <a className="nav-link" href="/cart">
-                <i className="fas fa-shopping-cart"></i>
+                <i
+                  className="fas fa-shopping-cart"
+                  style={{ color: "white" }}
+                ></i>
                 {cartItems.length}
               </a>
             </li>

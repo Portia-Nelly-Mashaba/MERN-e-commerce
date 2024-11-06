@@ -32,3 +32,12 @@ export const loginUser=(userData)=>dispatch=>{
             console.log('login Error:');
         });
 };
+
+export const logoutUser=(userData)=>dispatch=>{
+    localStorage.removeItem('currentUser')
+    localStorage.removeItem('cartItems')
+
+    dispatch({type:'USER_LOGOUT'})
+    
+    window.location.href='/login'
+}
