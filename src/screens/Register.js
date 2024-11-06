@@ -12,19 +12,20 @@ const Register = () => {
 
   function register(e) {
     e.preventDefault()
-    const user = {
-        name: name,
-        email: email,
-        password: password
-    }
+    const userData = {
+        name,
+        email,
+        password,
+    };
 
     if (password !== cpassword) {
         alert('Passwords do not match');
         return;
     }else{
-        dispatch(registerNewUser())
-    }
+        dispatch(registerNewUser(userData));
+    } 
   }
+  
   return (
     <div className="container d-flex align-items-center justify-content-center vh-100">
       <div className="row w-100">

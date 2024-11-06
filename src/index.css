@@ -46,3 +46,7 @@ p {
 input{
   box-shadow: none !important;
 }
+
+li{
+  color: white !important;
+}

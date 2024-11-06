@@ -5,21 +5,25 @@ import { createStore, applyMiddleware } from "redux";
 import {thunk} from 'redux-thunk'
 import { addToCart } from "./actions/cartActions.js";
 import addToCartReducer from "./reducers/cartReducer.js";
-import { registerNewUserReducer } from "./reducers/userReducer.js";
+import { loginUserReducer, registerNewUserReducer } from "./reducers/userReducer.js";
 
 
 const finalReducer = combineReducers({
     getAllProductsReducer : getAllProductsReducer,
     getAllProductByIdReducer : getAllProductByIdReducer,
     addToCartReducer : addToCartReducer,
-    registerNewUserReducer: registerNewUserReducer
+    registerNewUserReducer: registerNewUserReducer,
+    loginUserReducer : loginUserReducer
 
 })
 
 const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 
+const currentUser = JSON.parse(localStorage.getItem('currentUser')) || [];
+
 const initialState = {
-    addToCartReducer: { cartItems }
+    addToCartReducer: { cartItems: cartItems },
+    loginUserReducer: { currentUser: currentUser}
 };
 
 // const composeEnhancers = composeWithDevTools({});
