@@ -4,6 +4,8 @@ import axios from 'axios';
 import Product from '../components/Product';
 import { getAllProducts } from '../redux/actions/productActions';
 import { addToCart } from '../redux/actions/cartActions'; // Import addToCart action
+import Loader from '../components/Loader';
+import Error from '../components/Error';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -23,9 +25,9 @@ const Home = () => {
     <div className='content-center'>
       <div className='row justify-content-center mt-4 g-4'>
         {loading ? (
-          <h1>Loading...</h1>
+          <Loader />
         ) : error ? (
-          <h1>Something went wrong...</h1>
+          <Error error ='Something went wrong...' />
         ) : (
           products.map((product) => (
             <div className='col-md-3 mb-5 card p-3' style={{ margin: '0 20px' }} key={product._id}>

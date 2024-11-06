@@ -3,6 +3,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
+import Loader from '../components/Loader';
+import Error from '../components/Error';
 
 const ProductDetails = () => {
   const { id: productid } = useParams();
@@ -36,9 +38,9 @@ const ProductDetails = () => {
   return (
     <div className="container mt-5">
       {loading ? (
-        <h1>Loading...</h1>
+        <Loader />
       ) : error ? (
-        <h1>{error}</h1>
+        <Error error='Something went wrong' />
       ) : product ? (
         <div className="row">
           <div className="col-md-6 p-2">

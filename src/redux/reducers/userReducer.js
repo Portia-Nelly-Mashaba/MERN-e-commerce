@@ -16,7 +16,7 @@ export const registerNewUserReducer = (state = {}, action) => {
         case 'USER_REGISTER_FAILED':
             return {
                 ...state,
-                loading: true,
+                loading: false,
                 error: 'User Already Registered'
             };
         default:
@@ -41,9 +41,27 @@ export const loginUserReducer = (state = {}, action) => {
         case 'USER_LOGIN_FAILED':
             return {
                 ...state,
-                loading: true,
+                loading: false,
                 error: 'Invalid credentials'
             };
+        default:
+            return state;
+    }
+};
+
+const initialState = {
+    currentUser: null,
+   
+};
+
+export const logoutUserReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case 'LOGOUT_USER':
+            return {
+                ...state,
+                currentUser: null, 
+            };
+       
         default:
             return state;
     }

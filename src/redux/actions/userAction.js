@@ -34,10 +34,12 @@ export const loginUser=(userData)=>dispatch=>{
 };
 
 export const logoutUser=(userData)=>dispatch=>{
+    dispatch({ type: 'LOGOUT_USER' });
     localStorage.removeItem('currentUser')
     localStorage.removeItem('cartItems')
 
-    dispatch({type:'USER_LOGOUT'})
+    localStorage.removeItem('userData'); 
     
-    window.location.href='/login'
+    
+    window.location.href='/'
 }
