@@ -7,6 +7,7 @@ import ProductDetails from './screens/ProductDetails';
 import Cart from './screens/Cart';
 import Login from './screens/Login';
 import Register from './screens/Register';
+import Orders from './screens/Orders';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/cart' element={<Cart />}></Route>
           <Route path='/register' element={<Register />}></Route>
           <Route path='/login' element={<Login />}></Route>
+          <Route path='/orders' element={<Orders />}></Route>
         </Routes>
       </BrowserRouter>
       

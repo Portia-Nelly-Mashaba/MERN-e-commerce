@@ -6,7 +6,7 @@ import {thunk} from 'redux-thunk'
 import { addToCart } from "./actions/cartActions.js";
 import addToCartReducer from "./reducers/cartReducer.js";
 import { loginUserReducer, logoutUserReducer, registerNewUserReducer } from "./reducers/userReducer.js";
-import { placeOrderReducer } from "./reducers/orderReducer.js";
+import { getOrdersByUserIdReducer, placeOrderReducer } from "./reducers/orderReducer.js";
 
 
 const finalReducer = combineReducers({
@@ -17,6 +17,7 @@ const finalReducer = combineReducers({
     loginUserReducer : loginUserReducer,
     logoutUserReducer : logoutUserReducer,
     placeOrderReducer :placeOrderReducer,
+    getOrdersByUserIdReducer : getOrdersByUserIdReducer,
 
 })
 

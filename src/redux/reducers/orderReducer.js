@@ -10,10 +10,38 @@ export const placeOrderReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                success: true
+                orders: action.payload
             };
 
         case 'PLACE_ORDER_FAILED':
+            return {
+                ...state,
+                loading: false,
+                error: true
+            };
+
+        default:
+            return state;
+    }
+};
+
+
+export const getOrdersByUserIdReducer = (state = {}, action) => {
+    switch (action.type) {
+        case 'GET_ORDERSBYUSERID_REQUEST':
+            return {
+                ...state,
+                loading: true
+            };
+
+        case 'GET_ORDERBYUSERID_SUCCESS':
+            return {
+                ...state,
+                loading: false,
+                success: true
+            };
+
+        case 'GET_ORDERSBYUSERID_FAILED':
             return {
                 ...state,
                 loading: false,
