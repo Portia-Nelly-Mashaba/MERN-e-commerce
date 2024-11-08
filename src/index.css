@@ -50,3 +50,19 @@ input{
 li{
   color: white !important;
 }
+
+.admin{
+  margin-top: 10px;
+  background-color: rgb(8, 98, 114) !important;
+}
+.admin li{
+  
+  color:white !important;
+  list-style-type: none !important;
+  display: inline !important;
+  margin-left: 20px !important;  
+}
+
+.admin li a{
+  color:white !important;
+}

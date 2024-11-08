@@ -37,7 +37,7 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <ul className="navbar-nav justify-content-end w-100">
             <li className="nav-item">
-              <a className="nav-link" href="#" style={{ color: "white" }}>
+              <a className="nav-link" href="/" style={{ color: "white" }}>
                 Add Product
               </a>
             </li>

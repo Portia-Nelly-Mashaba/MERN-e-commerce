@@ -9,6 +9,13 @@ import Login from './screens/Login';
 import Register from './screens/Register';
 import Orders from './screens/Orders';
 import OrderInfo from './screens/OrderInfo';
+import Profile from './screens/Profile';
+import AdminLayout from './screens/Admin/Admin';
+import ProductsList from './screens/Admin/ProductsList';
+import UsersList from './screens/Admin/UsersList';
+import SellersList from './screens/Admin/SellersList';
+import AddNewProduct from './screens/Admin/AddNewProduct';
+import OrdersList from './screens/Admin/OrdersList';
 
 function App() {
   return (
@@ -23,6 +30,15 @@ function App() {
           <Route path='/login' element={<Login />}></Route>
           <Route path='/orders' element={<Orders />}></Route>
           <Route path='/order-details/:orderid' element={<OrderInfo />}></Route>
+          <Route path='/profile' element={<Profile />}></Route>
+
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="userslist" element={<UsersList />} />
+            <Route path="productslist" element={<ProductsList />} />
+            <Route path="sellerslist" element={<SellersList />} />
+            <Route path="addnewproduct" element={<AddNewProduct />} />
+            <Route path="orderslist" element={<OrdersList />} />
+          </Route>
         </Routes>
       </BrowserRouter>
       
