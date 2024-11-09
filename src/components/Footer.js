@@ -53,7 +53,8 @@ function Footer() {
             <h5>Connect with Us</h5>
             <a
               href="https://facebook.com"
-              className="text-white me-3"
+              className="me-3"
+              style={{ color: "#25b49c" }}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -61,7 +62,8 @@ function Footer() {
             </a>
             <a
               href="https://twitter.com"
-              className="text-white me-3"
+              className="me-3"
+              style={{ color: "#25b49c" }}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -69,7 +71,8 @@ function Footer() {
             </a>
             <a
               href="https://instagram.com"
-              className="text-white me-3"
+              className="me-3"
+              style={{ color: "#25b49c" }}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -80,7 +83,7 @@ function Footer() {
 
         {/* Footer Bottom Text */}
         <div className="text-center mt-3">
-          <small>&copy; {new Date().getFullYear()} SnapBuy. All rights reserved.</small>
+          <small>&copy; {new Date().getFullYear()} <span style={{ color: "#25b49c" }}>SnapBuy</span>MarketPlace. All rights reserved.</small>
         </div>
       </div>
     </footer>
