@@ -27,16 +27,27 @@ h1 {
 }
 
 .img-fluid {
-  height: 200px !important;
+  height: 280px !important;
 }
 
 .big-img {
-  height: 400px !important;
+  height: 350px !important;
 }
 
 p {
   text-align: left !important;
   padding: 20px !important;
+}
+
+button {
+  background-color: #25b49c !important;
+  color:  white !important;
+  border: none !important;
+}
+
+.custom-hover:hover {
+  background-color: #25b49c !important;
+  border-color: #25b49c !important;
 }
 
 .product-h1 {

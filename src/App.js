@@ -16,32 +16,40 @@ import UsersList from './screens/Admin/UsersList';
 import SellersList from './screens/Admin/SellersList';
 import AddNewProduct from './screens/Admin/AddNewProduct';
 import OrdersList from './screens/Admin/OrdersList';
+import EditProduct from './screens/Admin/EditProduct';
+import ProductCard from './screens/ProductCard';
+import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar/>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/product/:id' element={<ProductDetails />}></Route>
-          <Route path='/cart' element={<Cart />}></Route>
-          <Route path='/register' element={<Register />}></Route>
-          <Route path='/login' element={<Login />}></Route>
-          <Route path='/orders' element={<Orders />}></Route>
-          <Route path='/order-details/:orderid' element={<OrderInfo />}></Route>
-          <Route path='/profile' element={<Profile />}></Route>
+    <div className="d-flex flex-column min-vh-100">
+      <Navbar />
+      <main className="flex-grow-1">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/order-details/:orderid" element={<OrderInfo />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/addnewproduct" element={<AddNewProduct />} />
+            <Route path="/productcard" element={<ProductCard />} />
 
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route path="userslist" element={<UsersList />} />
-            <Route path="productslist" element={<ProductsList />} />
-            <Route path="sellerslist" element={<SellersList />} />
-            <Route path="addnewproduct" element={<AddNewProduct />} />
-            <Route path="orderslist" element={<OrdersList />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-      
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route path="userslist" element={<UsersList />} />
+              <Route path="productslist" element={<ProductsList />} />
+              <Route path="sellerslist" element={<SellersList />} />
+              <Route path="addnewproduct" element={<AddNewProduct />} />
+              <Route path="orderslist" element={<OrdersList />} />
+              <Route path="editproduct/:id" element={<EditProduct />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </main>
+      <Footer />
     </div>
   );
 }

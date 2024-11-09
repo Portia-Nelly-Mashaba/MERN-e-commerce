@@ -69,3 +69,29 @@ export const filterProducts = (searchKey, sort, category) => (dispatch) => {
             dispatch({ type: 'GET_PRODUCTS_FAILED', payload: err });
         });
 };
+
+export const deleteProduct = (id) => (dispatch) => {
+    dispatch({ type: 'DELETE_PRODUCT_REQUEST' });
+    axios
+        .delete(`http://localhost:5000/deleteproduct/${id}`)
+        .then(() => {
+            dispatch({ type: 'DELETE_PRODUCT_SUCCESS', payload: id });
+        })
+        .catch((err) => {
+            dispatch({ type: 'DELETE_PRODUCT_FAILED', payload: err });
+        });
+};
+
+export const addProduct =(product) => dispatch=>{
+    dispatch({type: 'ADD_PRODUCT'})
+
+    axios.post('http://localhost:5000/addproduct', {product})
+    .then(res =>{
+        dispatch({type: 'ADD_PRODUCT_SUCCESS'})
+        window.location.reload()
+    }).catch(err=>{
+        dispatch({type: 'ADD_PRODUCT_FAILED'})
+    })
+}
+
+

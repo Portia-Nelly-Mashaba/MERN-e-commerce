@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { addToCart } from "../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
 import Loader from '../components/Loader';
 import Error from '../components/Error';
+import Footer from '../components/Footer';
 
 const ProductDetails = () => {
   const { id: productid } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [quantity, setQuantity] = useState(1);  // Default to 1 as a number
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
 
   function addcart() {
@@ -37,6 +38,23 @@ const ProductDetails = () => {
 
   return (
     <div className="container mt-5">
+      <div>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb p-2">
+            <li className="breadcrumb-item">
+              <Link to="/" className="text-decoration-none text-dark">
+                <i className="fas fa-home me-1" style={{ color: "#25b49c" }}></i> Home
+              </Link>
+            </li>
+            {product && (
+              <li className="breadcrumb-item active text-dark" aria-current="page">
+                {product.name}
+              </li>
+            )}
+          </ol>
+        </nav>
+      </div>
+      
       {loading ? (
         <Loader />
       ) : error ? (
@@ -61,7 +79,7 @@ const ProductDetails = () => {
               <h1 className="product-h1">Select Quantity</h1>
               <select
                 value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}  // Convert here
+                onChange={(e) => setQuantity(Number(e.target.value))}
               >
                 {[...Array(product.countInStock).keys()].map((x) => (
                   <option key={x + 1} value={x + 1}>{x + 1}</option>
@@ -75,12 +93,17 @@ const ProductDetails = () => {
               >
                 ADD TO CART
               </button>
+              <Link to="/cart" className="btn btn-outline-success ms-3 custom-hover">
+                VIEW CART
+              </Link>
             </div>
           </div>
         </div>
       ) : (
         <h1>Product not found</h1>
       )}
+      
+     
     </div>
   );
 };

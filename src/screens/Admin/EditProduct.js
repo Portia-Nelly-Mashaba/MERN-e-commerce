@@ -1,48 +1,73 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addProduct } from "../../redux/actions/productActions";
-import Error from "../../components/Error";
-import Loader from "../../components/Loader";
-import Success from "../../components/Success";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
-
-export default function AddProduct() {
+export default function ProductForm({ onProductUpdated }) {
+  const { id: productid } = useParams();
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [countInStock, setCountInStock] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
 
-  const dispatch = useDispatch();
-  const addProductState = useSelector((state) => state.addProductReducer);
-  const { loading, error, success } = addProductState;
+  // Fetch product data for editing if productId is present
+  useEffect(() => {
+    if (productid) {
+      axios
+        .get(`http://localhost:5000/getproductbyid/${productid}`)
+        .then((response) => {
+          const product = response.data;
+          setName(product.name);
+          setPrice(product.price);
+          setCountInStock(product.countInStock);
+          setImageUrl(product.image);
+          setCategory(product.category);
+          setDescription(product.description);
+        })
+        .catch((err) => setError("Failed to fetch product details"));
+    }
+  }, [productid]);
 
-  const handleAddProduct= (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const product = {
-      name: name,
-      price: price,
-      countInStock: countInStock,
-      image: imageUrl,
-      description: description,
-      category,
-    };
-    dispatch(addProduct(product))
-    
+    setLoading(true);
+    setError(null); 
+    setSuccess(false); 
+
+    const product = { name, price, countInStock, image: imageUrl, description, category };
+    const request = productid
+      ? axios.put(`http://localhost:5000/updateproduct/${productid}`, { product })
+      : axios.post("http://localhost:5000/addproduct", { product });
+
+    request
+      .then((res) => {
+        setSuccess(true);
+        setLoading(false);
+        setError(null); // Ensure error is cleared if request is successful
+        onProductUpdated();
+      })
+      .catch((err) => {
+        setError("Failed to save product");
+        setLoading(false);
+        setSuccess(false); // Clear success if there is an error
+      });
   };
 
   return (
     <div className="container d-flex align-items-center justify-content-center vh-100 mt-2">
       <div className="row w-100">
         <div className="col-md-5 mx-auto mt-4 card p-4">
-          <h1 className="text-center mb-4">Add Product</h1>
-          
-          {error && <Error error="An error occurred while adding the product" />}
-          {loading && <Loader />}
-          {success && <Success message="Product added successfully!" />}
+          <h1 className="text-center mb-4">{productid ? "Edit" : "Add"} Product</h1>
 
-          <form onSubmit={handleAddProduct} >
+          {error && <div className="alert alert-danger">{error}</div>}
+          {loading && <div>Loading...</div>}
+          {success && <div className="alert alert-success">Product saved successfully!</div>}
+
+          <form onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Product Name"
@@ -75,7 +100,6 @@ export default function AddProduct() {
               onChange={(e) => setImageUrl(e.target.value)}
               required
             />
-               {/* Category Select Dropdown */}
             <select
               className="form-control mb-3"
               value={category}
@@ -97,7 +121,7 @@ export default function AddProduct() {
             />
             <div className="text-end">
               <button type="submit" className="btn btn-dark mt-3 mb-4">
-                Add Product
+                {productid ? "Update" : "Add"} Product
               </button>
             </div>
           </form>

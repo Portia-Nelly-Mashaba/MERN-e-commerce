@@ -44,3 +44,11 @@ export const logoutUser=(userData)=>dispatch=>{
     
     window.location.href='/'
 }
+
+// export const getAllUsers=()=>dispatch=>{
+
+//     dispatch({type: 'GET_ALLUSERS_REQUEST'})
+
+//     axios
+//         .get('http://localhost:5000/login'
+// }

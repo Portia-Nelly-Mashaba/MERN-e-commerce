@@ -35,12 +35,12 @@ const Home = () => {
           products.map((product) => (
             <div className='col-md-3 mb-5 card p-3' style={{ margin: '0 20px' }} key={product._id}>
               <Product product={product} />
-              <button
+              {/* <button
                 className='btn btn-dark mt-3'
                 onClick={() => handleAddToCart(product)}
               >
                 ADD TO CART
-              </button>
+              </button> */}
             </div>
           ))
         )}

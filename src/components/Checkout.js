@@ -30,7 +30,7 @@ export default function Checkout({amount}) {
             stripeKey='pk_test_51Q7FFuLlrdPxaQ2h9M23TCVkhTXkSYXqXIfcuRallXojdzlutUV9c6E0Hm5hSBDwKs8ibhsO0wbLQK2U4ogGG4rL00T53HK2yx'
             >
        
-            <button className='btn btn-dark' onClick={validate}>PAY NOW</button>
+            <button className='btn' onClick={validate}>PAY NOW</button>
         </StripeCheckout>
     </div>
   )

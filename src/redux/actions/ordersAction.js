@@ -57,3 +57,15 @@ export const getOrdersByUserId = () =>(dispatch, getItem)=>{
     })
 
 }
+
+export const getAllOrders=()=>(dispatch, getState) =>{
+    dispatch({type: 'GET_ORDERS_REQUEST'})
+
+    axios.get('http://localhost:5000/getallorders')
+    .then(res=>{
+        dispatch({type: 'GET_ALLORDERS_SUCCESS', payload:res.data})
+        console.log(res.data);
+    }).catch(err =>{
+        dispatch({type:'GET_ALLORDERS_FAILED', payload:err})
+    })
+}
