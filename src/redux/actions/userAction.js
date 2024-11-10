@@ -45,10 +45,30 @@ export const logoutUser=(userData)=>dispatch=>{
     window.location.href='/'
 }
 
-// export const getAllUsers=()=>dispatch=>{
+export const getAllUsers=()=>dispatch=>{
 
-//     dispatch({type: 'GET_ALLUSERS_REQUEST'})
+    dispatch({type: 'GET_ALLUSERS_REQUEST'})
 
-//     axios
-//         .get('http://localhost:5000/login'
-// }
+    axios
+        .get('http://localhost:5000/getallusers')
+        .then(res=>{
+            dispatch({type: 'GET_ALLUSERS_SUCCESS', payload: res.data})
+        }).catch(err=>{
+            dispatch({type: 'GET_ALLUSERS_FAILED', payload: err})
+        })
+}
+
+export const deleteUser=(userid)=>dispatch=>{
+
+    dispatch({type: 'DELETE_USER_REQUEST'})
+
+    axios
+        .post('http://localhost:5000/deleteuser', {userid})
+        .then(res=>{
+            dispatch({type: 'DELETE_USER_SUCCESS', payload: res.data})
+            alert('User deleted successfully')
+            window.location.reload()
+        }).catch(err=>{
+            dispatch({type: 'DELETE_USER_FAILED', payload: err})
+        })
+}

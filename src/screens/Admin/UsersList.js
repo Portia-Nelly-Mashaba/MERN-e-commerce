@@ -1,25 +1,26 @@
 import React from 'react'
-// import {useState, useEffect} from 'react'
-// import {useDispatch, useSelector} from 'react-redux'
+import {useState, useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 // import { deleteUser, getAllUsers } from '../actions/userActions'
-// import Loader from '../components/Loader'
-// import Error from '../components/Error'
+import Loader from '../../components/Loader'
+import Error from '../../components/Error'
+import { deleteUser, getAllUsers } from '../../redux/actions/userAction'
 
 
 export default function Userslist() {
 
-    // const getallusersstate = useSelector(state =>state.getAllUsersReducer)
+    const getallusersstate = useSelector(state =>state.getAllUsersReducer)
 
-    // const {users , loading , error} = getallusersstate
+    const {users , loading , error} = getallusersstate
 
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     dispatch(getAllUsers())
+        dispatch(getAllUsers())
         
-    // }, [])
+    }, [])
 
     return (
         <div>
@@ -36,16 +37,21 @@ export default function Userslist() {
                 </thead>
 
                 <tbody>
-                    {/* {loading && (<Loader/>)}
+                    {loading && (<Loader/>)}
                     {error && (<Error error='Something went wrong'/>)}
                     {users && (users.map(user=>{
                         return <tr>
                             <td>{user._id}</td>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
-                            <td><i class="far fa-trash-alt" onClick={()=>{dispatch(deleteUser(user._id))}}></i></td>
+                            <td>
+                                <i class="far fa-trash-alt" 
+                                style={{ marginRight: '10px', color: 'red', cursor: 'pointer' }}
+                                onClick={()=>{dispatch(deleteUser(user._id))}}>
+                                </i>
+                            </td>
                         </tr>
-                    }))} */}
+                    }))}
                 </tbody>
 
             </table>

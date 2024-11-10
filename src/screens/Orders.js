@@ -29,9 +29,20 @@ const Orders = () => {
     fetchOrders();
   }, []);
 
-  const handleDelete = (orderId) => {
-    // Delete order logic goes here
-    console.log("Delete order with ID:", orderId);
+  const handleDelete = async (orderId) => {
+    try {
+      setLoading(true);
+      // Call API to update order status to 'Cancelled'
+      await axios.put(`http://localhost:5000/cancelorder/${orderId}`);
+      // Update local state to reflect the cancellation
+      setOrders(orders.map(order =>
+        order._id === orderId ? { ...order, status: "Cancelled" } : order
+      ));
+    } catch (err) {
+      setError("Failed to cancel the order");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -84,18 +95,9 @@ const Orders = () => {
                           fontSize: "20px",
                         }}
                       ></i>
-                      {/* <i
-          className="far fa-edit"
-          style={{
-            cursor: "pointer",
-            marginRight: "10px",
-            color: "blue",
-          }}
-        ></i> */}
                     </td>
                   </tr>
                 ))}
-                {error && <Error error="Something went wrong" />}
               </tbody>
             </table>
           )}

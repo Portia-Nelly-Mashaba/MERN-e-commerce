@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import Loader from '../components/Loader';
 import Error from '../components/Error';
 import Footer from '../components/Footer';
+import Review from "./Review";
 
 const ProductDetails = () => {
   const { id: productid } = useParams();
@@ -97,6 +98,9 @@ const ProductDetails = () => {
                 VIEW CART
               </Link>
             </div>
+
+            <hr />
+            <Review product={product}/>
           </div>
         </div>
       ) : (
